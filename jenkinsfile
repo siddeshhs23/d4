@@ -1,15 +1,35 @@
+
 pipeline {
-    agent any 
-          stages { 
-              stage('Compile') { 
-                  steps { 
-                     bat 'javac Hello.java' 
-     }
-  } 
-stage('Run') {
-         steps {
-             bat 'java Hello'
-     }
-   }
- }
-} 
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build Started'
+                echo 'Hello from Jenkins Pipeline'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing Completed'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deployment Completed'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
+
